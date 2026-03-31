@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benjamin Maples — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0C0C0C;
+      --surface: #141414;
+      --surface-raised: #1A1A1A;
+      --border: #222222;
+      --border-light: #2A2A2A;
+      --text: #E8E4DF;
+      --text-muted: #8A857E;
+      --accent: #C4A882;
+      --accent-dim: rgba(196, 168, 130, 0.12);
+      --accent-glow: rgba(196, 168, 130, 0.06);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(12, 12, 12, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s ease;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 400;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1.1;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero-description {
+      max-width: 560px;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .hero-line {
+      width: 60px;
+      height: 1px;
+      background: var(--accent);
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 7rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.9;
+    }
+
+    .about-details {
+      border-left: 1px solid var(--border);
+      padding-left: 2.5rem;
+    }
+
+    .detail-item {
+      margin-bottom: 2rem;
+    }
+
+    .detail-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.4s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-light);
+      background: var(--surface-raised);
+    }
+
+    .project-card:hover::before { height: 100%; }
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.75rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .project-number {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--border-light);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SKILLS ── */
+    .skills-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .skill-group {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color 0.3s;
+    }
+
+    .skill-group:hover {
+      border-color: var(--border-light);
+    }
+
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-item {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0;
+      transition: color 0.3s;
+    }
+
+    .skill-item:hover { color: var(--text); }
+
+    /* ── CONTACT ── */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .contact-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.88rem;
+      transition: all 0.3s;
+      background: var(--surface);
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-link-arrow {
+      color: var(--accent);
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+    }
+
+    .contact-link:hover .contact-link-arrow {
+      transform: translateX(4px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .nav-links a { font-size: 0.7rem; }
+
+      section { padding: 4rem 1.5rem; }
+
+      .about-content,
+      .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .about-details {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 2rem;
+      }
+
+      .skills-layout { grid-template-columns: 1fr; }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+
+      .project-number {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.2rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">B. Maples</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">Portfolio / 2025</div>
+    <h1>Benjamin Maples</h1>
+    <p class="hero-description">
+      Building at the intersection of artificial intelligence and practical software. 
+      Focused on creating tools and experiences that solve real problems with clean, intentional design.
+    </p>
+    <div class="hero-line"></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="fade-in">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          I'm a developer with a deep interest in artificial intelligence and how it can be applied to 
+          everyday problems. My work spans from machine learning experiments to full-stack applications, 
+          always with an emphasis on clarity and usability.
+        </p>
+        <p>
+          When I'm not writing code, I'm researching the latest developments in AI, prototyping new ideas, 
+          or refining projects that push the boundaries of what's possible with current technology.
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-item">
+          <div class="detail-label">Focus</div>
+          <div class="detail-value">AI / Machine Learning</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Approach</div>
+          <div class="detail-value">Research-Driven Development</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Location</div>
+          <div class="detail-value">South Carolina</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Currently</div>
+          <div class="detail-value">Open to Opportunities</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-in">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div>
+          <div class="project-name">AI Chat Assistant</div>
+          <p class="project-desc">
+            A conversational interface powered by large language models, designed 
+            for natural dialogue and contextual understanding across extended sessions.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">LLM</span>
+            <span class="tag">NLP</span>
+          </div>
+        </div>
+        <span class="project-number">001</span>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-name">Image Classification Pipeline</div>
+          <p class="project-desc">
+            An end-to-end pipeline for training, evaluating, and deploying image 
+            classification models with support for custom datasets and transfer learning.
+          </p>
+          <div class="project-tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Deep Learning</span>
+          </div>
+        </div>
+        <span class="project-number">002</span>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-name">Personal Dashboard</div>
+          <p class="project-desc">
+            A custom-built web dashboard for aggregating data sources, tracking goals, 
+            and visualizing personal metrics in a unified interface.
+          </p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">REST API</span>
+            <span class="tag">Data Viz</span>
+          </div>
+        </div>
+        <span class="project-number">003</span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills" class="fade-in">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-layout">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-item">Python</div>
+        <div class="skill-item">JavaScript</div>
+        <div class="skill-item">HTML / CSS</div>
+        <div class="skill-item">SQL</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">AI / ML</div>
+        <div class="skill-item">PyTorch</div>
+        <div class="skill-item">TensorFlow</div>
+        <div class="skill-item">Scikit-learn</div>
+        <div class="skill-item">LangChain</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools</div>
+        <div class="skill-item">Git / GitHub</div>
+        <div class="skill-item">VS Code</div>
+        <div class="skill-item">Docker</div>
+        <div class="skill-item">Linux</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fade-in">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-content">
+      <p class="contact-text">
+        Interested in working together, have a question about a project, 
+        or just want to connect? I'm always open to a conversation. 
+        Reach out through any of the channels listed here.
+      </p>
+      <div class="contact-links">
+        <a href="https://github.com/bmap02" target="_blank" class="contact-link">
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div>github.com/bmap02</div>
+          </div>
+          <span class="contact-link-arrow">&#8594;</span>
+        </a>
+        <a href="mailto:your@email.com" class="contact-link">
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div>your@email.com</div>
+          </div>
+          <span class="contact-link-arrow">&#8594;</span>
+        </a>
+        <a href="https://linkedin.com/in/" target="_blank" class="contact-link">
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div>linkedin.com/in/yourprofile</div>
+          </div>
+          <span class="contact-link-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Benjamin Maples &mdash; 2025</p>
+  </footer>
+
+  <!-- SCROLL ANIMATIONS -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
