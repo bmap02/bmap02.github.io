@@ -40,7 +40,6 @@
       color: var(--bg);
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0;
@@ -79,7 +78,6 @@
 
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -131,7 +129,6 @@
       animation: fadeUp 0.8s ease forwards 0.8s;
     }
 
-    /* ── SECTIONS ── */
     section {
       padding: 7rem 2.5rem;
       max-width: 1100px;
@@ -164,7 +161,6 @@
       background: var(--border);
     }
 
-    /* ── ABOUT ── */
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -184,9 +180,7 @@
       padding-left: 2.5rem;
     }
 
-    .detail-item {
-      margin-bottom: 2rem;
-    }
+    .detail-item { margin-bottom: 2rem; }
 
     .detail-label {
       font-family: var(--mono);
@@ -202,11 +196,7 @@
       color: var(--text);
     }
 
-    /* ── PROJECTS ── */
-    .projects-grid {
-      display: grid;
-      gap: 1.5rem;
-    }
+    .projects-grid { display: grid; gap: 1.5rem; }
 
     .project-card {
       background: var(--surface);
@@ -252,11 +242,7 @@
       margin-bottom: 1.25rem;
     }
 
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
     .tag {
       font-family: var(--mono);
@@ -275,7 +261,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* ── SKILLS ── */
     .skills-layout {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -289,9 +274,7 @@
       transition: border-color 0.3s;
     }
 
-    .skill-group:hover {
-      border-color: var(--border-light);
-    }
+    .skill-group:hover { border-color: var(--border-light); }
 
     .skill-group-title {
       font-family: var(--mono);
@@ -313,7 +296,6 @@
 
     .skill-item:hover { color: var(--text); }
 
-    /* ── CONTACT ── */
     .contact-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -364,11 +346,8 @@
       transition: transform 0.3s;
     }
 
-    .contact-link:hover .contact-link-arrow {
-      transform: translateX(4px);
-    }
+    .contact-link:hover .contact-link-arrow { transform: translateX(4px); }
 
-    /* ── FOOTER ── */
     footer {
       padding: 3rem 2.5rem;
       text-align: center;
@@ -383,7 +362,6 @@
       text-transform: uppercase;
     }
 
-    /* ── DIVIDER ── */
     .divider {
       max-width: 1100px;
       margin: 0 auto;
@@ -391,7 +369,6 @@
       background: var(--border);
     }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -408,34 +385,22 @@
       transform: translateY(0);
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1.5rem; }
       .nav-links a { font-size: 0.7rem; }
-
       section { padding: 4rem 1.5rem; }
-
       .about-content,
       .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
-
       .about-details {
         border-left: none;
         border-top: 1px solid var(--border);
         padding-left: 0;
         padding-top: 2rem;
       }
-
       .skills-layout { grid-template-columns: 1fr; }
-
-      .project-card {
-        grid-template-columns: 1fr;
-        padding: 2rem;
-      }
-
-      .project-number {
-        order: -1;
-      }
+      .project-card { grid-template-columns: 1fr; padding: 2rem; }
+      .project-number { order: -1; }
     }
 
     @media (max-width: 480px) {
@@ -446,7 +411,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">B. Maples</div>
     <div class="nav-links">
@@ -457,12 +421,11 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-label">Portfolio / 2025</div>
     <h1>Benjamin Maples</h1>
     <p class="hero-description">
-      Building at the intersection of artificial intelligence and practical software. 
+      Building at the intersection of artificial intelligence and practical software.
       Focused on creating tools and experiences that solve real problems with clean, intentional design.
     </p>
     <div class="hero-line"></div>
@@ -470,7 +433,6 @@
 
   <div class="divider"></div>
 
-  <!-- ABOUT -->
   <section id="about" class="fade-in">
     <div class="section-header">
       <span class="section-number">01</span>
@@ -480,12 +442,12 @@
     <div class="about-content">
       <div class="about-text">
         <p>
-          I'm a developer with a deep interest in artificial intelligence and how it can be applied to 
-          everyday problems. My work spans from machine learning experiments to full-stack applications, 
+          I'm a developer with a deep interest in artificial intelligence and how it can be applied to
+          everyday problems. My work spans from machine learning experiments to full-stack applications,
           always with an emphasis on clarity and usability.
         </p>
         <p>
-          When I'm not writing code, I'm researching the latest developments in AI, prototyping new ideas, 
+          When I'm not writing code, I'm researching the latest developments in AI, prototyping new ideas,
           or refining projects that push the boundaries of what's possible with current technology.
         </p>
       </div>
@@ -512,7 +474,6 @@
 
   <div class="divider"></div>
 
-  <!-- PROJECTS -->
   <section id="projects" class="fade-in">
     <div class="section-header">
       <span class="section-number">02</span>
@@ -525,7 +486,7 @@
         <div>
           <div class="project-name">Autonomous Drone Obstacle Avoidance</div>
           <p class="project-desc">
-            A reinforcement learning system for training a quadcopter in CoppeliaSim to autonomously 
+            A reinforcement learning system for training a quadcopter in CoppeliaSim to autonomously
             explore and avoid obstacles using PPO (Proximal Policy Optimization) and LiDAR sensor feedback.
           </p>
           <div class="project-tags">
@@ -541,7 +502,7 @@
         <div>
           <div class="project-name">TrackTweakVST</div>
           <p class="project-desc">
-            VST/VST3 audio plugin built with the JUCE framework that analyzes incoming signals from a musical piece 
+            VST/VST3 audio plugin built with the JUCE framework that analyzes incoming signals from a musical piece
             and offers AI-driven guidance to professionally mix a track based on specific genres and styles.
           </p>
           <div class="project-tags">
@@ -557,7 +518,7 @@
         <div>
           <div class="project-name">Personal Dashboard</div>
           <p class="project-desc">
-            A custom-built web dashboard for aggregating data sources, tracking goals, 
+            A custom-built web dashboard for aggregating data sources, tracking goals,
             and visualizing personal metrics in a unified interface.
           </p>
           <div class="project-tags">
@@ -574,7 +535,6 @@
 
   <div class="divider"></div>
 
-  <!-- SKILLS -->
   <section id="skills" class="fade-in">
     <div class="section-header">
       <span class="section-number">03</span>
@@ -606,7 +566,6 @@
 
   <div class="divider"></div>
 
-  <!-- CONTACT -->
   <section id="contact" class="fade-in">
     <div class="section-header">
       <span class="section-number">04</span>
@@ -615,8 +574,8 @@
     </div>
     <div class="contact-content">
       <p class="contact-text">
-        Interested in working together, have a question about a project, 
-        or just want to connect? I'm always open to a conversation. 
+        Interested in working together, have a question about a project,
+        or just want to connect? I'm always open to a conversation.
         Reach out through any of the channels listed here.
       </p>
       <div class="contact-links">
@@ -645,13 +604,21 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <p>Benjamin Maples &mdash; 2025</p>
   </footer>
 
-  <!-- SCROLL ANIMATIONS -->
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        i
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
