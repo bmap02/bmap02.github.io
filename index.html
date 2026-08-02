@@ -1,624 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benjamin Maples — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benjamin Maples — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel:#12161C;
+    --panel:#1B212B;
+    --panel-line:#2A313D;
+    --ember:#FF6A39;
+    --ember-dim:#8C4426;
+    --arc:#4FD8C4;
+    --arc-dim:#2E6E64;
+    --bone:#ECE9E2;
+    --slate:#8C93A3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--steel);
+    color:var(--bone);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.65;
+  }
+  h1,h2,h3,.eyebrow{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--arc);
+    display:block;
+    margin-bottom:14px;
+  }
+  .wrap{
+    max-width:820px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(18,22,28,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-line);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:60px;
+    max-width:900px;
+  }
+  nav .brand{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:0.04em;
+  }
+  nav .links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+  }
+  nav .links a{
+    color:var(--slate);
+    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    transition:color 0.15s ease;
+  }
+  nav .links a:hover{ color:var(--ember); }
 
-    :root {
-      --bg: #0C0C0C;
-      --surface: #141414;
-      --surface-raised: #1A1A1A;
-      --border: #222222;
-      --border-light: #2A2A2A;
-      --text: #E8E4DF;
-      --text-muted: #8A857E;
-      --accent: #C4A882;
-      --accent-dim: rgba(196, 168, 130, 0.12);
-      --accent-glow: rgba(196, 168, 130, 0.06);
-      --serif: 'DM Serif Display', Georgia, serif;
-      --sans: 'DM Sans', -apple-system, sans-serif;
-      --mono: 'JetBrains Mono', monospace;
-    }
+  header.hero{
+    padding:120px 0 96px;
+    border-bottom:1px solid var(--panel-line);
+  }
+  header.hero .wrap{ max-width:900px; }
+  header.hero h1{
+    font-size:56px;
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  header.hero .tagline{
+    font-size:21px;
+    color:var(--bone);
+    max-width:560px;
+    margin-bottom:28px;
+  }
+  header.hero .tagline .accent{ color:var(--ember); }
+  header.hero .meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--slate);
+  }
+  header.hero .meta span{ color:var(--arc); }
 
-    html { scroll-behavior: smooth; }
+  section{ padding:88px 0; }
+  section.about{ border-bottom:1px solid var(--panel-line); }
+  section.about .wrap{ max-width:900px; }
+  section.about h2{ font-size:28px; margin-bottom:26px; }
+  section.about p{
+    max-width:640px;
+    color:var(--bone);
+    margin-bottom:18px;
+    font-size:16px;
+  }
+  section.about p:last-of-type{ margin-bottom:0; }
+  section.about a{ color:var(--arc); }
+  .lab-note{
+    margin-top:22px;
+    padding:16px 18px;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:4px;
+    max-width:640px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--slate);
+  }
+  .lab-note a{ color:var(--arc); }
 
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
+  section.journey{ border-bottom:1px solid var(--panel-line); }
+  section.journey .wrap{ max-width:900px; }
+  section.journey h2{ font-size:28px; margin-bottom:56px; }
+  .timeline{ position:relative; padding-left:48px; }
+  .spine{
+    position:absolute;
+    left:14px;
+    top:6px;
+    bottom:6px;
+    width:3px;
+  }
+  .spine .seg-weld{
+    height:38%;
+    width:100%;
+    background:repeating-linear-gradient(
+      180deg,
+      var(--ember) 0px, var(--ember) 9px,
+      var(--ember-dim) 9px, var(--ember-dim) 14px
+    );
+  }
+  .spine .seg-circuit{
+    height:62%;
+    width:100%;
+    background:repeating-linear-gradient(
+      180deg,
+      var(--arc) 0px, var(--arc) 3px,
+      transparent 3px, transparent 13px
+    );
+  }
+  .milestone{
+    position:relative;
+    padding-bottom:56px;
+  }
+  .milestone:last-child{ padding-bottom:0; }
+  .marker{
+    position:absolute;
+    left:-48px;
+    top:2px;
+    width:17px;
+    height:17px;
+    background:var(--steel);
+    border:3px solid var(--ember);
+    border-radius:50%;
+  }
+  .milestone.node-circuit .marker{
+    border-radius:2px;
+    border-color:var(--arc);
+  }
+  .milestone .m-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ember);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:6px;
+  }
+  .milestone.node-circuit .m-eyebrow{ color:var(--arc); }
+  .milestone .m-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    max-width:560px;
+    flex-wrap:wrap;
+  }
+  .milestone h3{
+    font-size:20px;
+    margin-bottom:8px;
+    font-weight:500;
+  }
+  .milestone .m-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--slate);
+    white-space:nowrap;
+  }
+  .milestone .m-org{
+    font-size:14px;
+    color:var(--slate);
+    margin-bottom:8px;
+  }
+  .milestone p{
+    color:var(--slate);
+    max-width:560px;
+    font-size:15px;
+  }
 
-    ::selection {
-      background: var(--accent);
-      color: var(--bg);
-    }
+  section.projects .wrap{ max-width:900px; }
+  section.projects h2{ font-size:28px; margin-bottom:36px; }
+  .project-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:20px;
+  }
+  .project-card{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:4px;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:190px;
+  }
+  .project-card h3{
+    font-size:18px;
+    font-weight:500;
+    margin-bottom:6px;
+  }
+  .project-card .m-date{
+    display:block;
+    margin-bottom:12px;
+  }
+  .project-card p{
+    color:var(--slate);
+    font-size:14px;
+    margin-bottom:18px;
+    flex-grow:1;
+  }
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--arc);
+    border:1px solid var(--arc-dim);
+    padding:4px 9px;
+    border-radius:3px;
+  }
 
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 1.25rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(12, 12, 12, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      transition: padding 0.3s ease;
-    }
+  section.skills{ border-top:1px solid var(--panel-line); }
+  section.skills .wrap{ max-width:900px; }
+  section.skills h2{ font-size:28px; margin-bottom:36px; }
+  .skill-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:32px;
+  }
+  .skill-group .g-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ember);
+    margin-bottom:14px;
+  }
+  .skill-group ul{ list-style:none; }
+  .skill-group li{
+    font-size:14px;
+    color:var(--bone);
+    padding:6px 0;
+    border-bottom:1px solid var(--panel-line);
+  }
+  .skill-group li:last-child{ border-bottom:none; }
 
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-    }
+  footer{
+    border-top:1px solid var(--panel-line);
+    padding:64px 0 48px;
+  }
+  footer .wrap{ max-width:900px; }
+  footer h2{ font-size:28px; margin-bottom:16px; }
+  footer p{ color:var(--slate); max-width:480px; margin-bottom:32px; }
+  .contact-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .contact-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--bone);
+    text-decoration:none;
+    border:1px solid var(--panel-line);
+    padding:12px 18px;
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .contact-links a:hover{
+    border-color:var(--ember);
+    color:var(--ember);
+  }
+  .copyright{
+    margin-top:48px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--panel-line);
+  }
 
-    .nav-links { display: flex; gap: 2.5rem; }
-
-    .nav-links a {
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s;
-      font-weight: 400;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 2.5rem 6rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .hero-label {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.2s;
-    }
-
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      line-height: 1.1;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.4s;
-    }
-
-    .hero-description {
-      max-width: 560px;
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.6s;
-    }
-
-    .hero-line {
-      width: 60px;
-      height: 1px;
-      background: var(--accent);
-      margin-top: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.8s;
-    }
-
-    section {
-      padding: 7rem 2.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-
-    .section-number {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-    }
-
-    .section-title {
-      font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 400;
-    }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.9;
-    }
-
-    .about-details {
-      border-left: 1px solid var(--border);
-      padding-left: 2.5rem;
-    }
-
-    .detail-item { margin-bottom: 2rem; }
-
-    .detail-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .detail-value {
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-
-    .projects-grid { display: grid; gap: 1.5rem; }
-
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 2.5rem;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 2px;
-      height: 0;
-      background: var(--accent);
-      transition: height 0.4s ease;
-    }
-
-    .project-card:hover {
-      border-color: var(--border-light);
-      background: var(--surface-raised);
-    }
-
-    .project-card:hover::before { height: 100%; }
-
-    .project-name {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .project-desc {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      line-height: 1.8;
-      margin-bottom: 1.25rem;
-    }
-
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      padding: 0.35rem 0.75rem;
-      background: var(--accent-dim);
-      color: var(--accent);
-      text-transform: uppercase;
-    }
-
-    .project-number {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--border-light);
-      letter-spacing: 0.05em;
-    }
-
-    .skills-layout {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .skill-group {
-      padding: 2rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      transition: border-color 0.3s;
-    }
-
-    .skill-group:hover { border-color: var(--border-light); }
-
-    .skill-group-title {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .skill-item {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      padding: 0.5rem 0;
-      transition: color 0.3s;
-    }
-
-    .skill-item:hover { color: var(--text); }
-
-    .contact-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-    }
-
-    .contact-text {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.9;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 1.5rem;
-      border: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.88rem;
-      transition: all 0.3s;
-      background: var(--surface);
-    }
-
-    .contact-link:hover {
-      border-color: var(--accent);
-      background: var(--accent-dim);
-    }
-
-    .contact-link-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .contact-link-arrow {
-      color: var(--accent);
-      font-size: 1.1rem;
-      transition: transform 0.3s;
-    }
-
-    .contact-link:hover .contact-link-arrow { transform: translateX(4px); }
-
-    footer {
-      padding: 3rem 2.5rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    footer p {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .divider {
-      max-width: 1100px;
-      margin: 0 auto;
-      height: 1px;
-      background: var(--border);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-      .nav-links a { font-size: 0.7rem; }
-      section { padding: 4rem 1.5rem; }
-      .about-content,
-      .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-details {
-        border-left: none;
-        border-top: 1px solid var(--border);
-        padding-left: 0;
-        padding-top: 2rem;
-      }
-      .skills-layout { grid-template-columns: 1fr; }
-      .project-card { grid-template-columns: 1fr; padding: 2rem; }
-      .project-number { order: -1; }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2.2rem; }
-      .nav-links { gap: 1rem; }
-    }
-  </style>
+  @media (max-width:640px){
+    header.hero{ padding:80px 0 64px; }
+    header.hero h1{ font-size:38px; }
+    header.hero .tagline{ font-size:18px; }
+    nav .links{ display:none; }
+    .timeline{ padding-left:38px; }
+    .marker{ left:-38px; }
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-logo">B. Maples</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+<nav>
+  <div class="wrap">
+    <span class="brand">B. MAPLES</span>
+    <ul class="links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <section class="hero">
-    <div class="hero-label">Portfolio / 2025</div>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Portfolio / South Carolina</span>
     <h1>Benjamin Maples</h1>
-    <p class="hero-description">
-      Building at the intersection of artificial intelligence and practical software.
-      Focused on creating tools and experiences that solve real problems with clean, intentional design.
-    </p>
-    <div class="hero-line"></div>
-  </section>
+    <p class="meta">Computer Science, Clemson University &nbsp;·&nbsp; Research Assistant, <span>AI SENDS Lab</span></p>
+  </div>
+</header>
 
-  <div class="divider"></div>
-
-  <section id="about" class="fade-in">
-    <div class="section-header">
-      <span class="section-number">01</span>
-      <h2 class="section-title">About</h2>
-      <div class="section-line"></div>
+<section class="about" id="about">
+  <div class="wrap">
+    <span class="eyebrow">About</span>
+    <h2>Background</h2>
+    <p>I'm a Computer Science student at Clemson University with a background that started outside of software, in the trades rather than the classroom. That path taught me precision, discipline, and a habit of thinking in systems, qualities I now bring directly to my work in robotics and software engineering.</p>
+    <p>I'm currently a research assistant in Clemson's AI SENDS Lab (AI based Sensing, Networking, and Data Services), led by Dr. Abolfazl Razi, where I work on interfacing vision language models and vision transformers into robotics applications. I'm especially drawn to system level programming and building software that bridges perception and control in real world environments.</p>
+    <p>Outside the lab, I chase the same curiosity through audio engineering, and enjoy understanding how systems actually work well enough to make them work better.</p>
+    <div class="lab-note">
+      Lab: <a href="https://arazi2.github.io/aisends.github.io/" target="_blank" rel="noopener">AI SENDS Lab, Clemson University</a> — currently reading into tactile feedback methods for vision language action models, including work like VLA Touch.
     </div>
-    <div class="about-content">
-      <div class="about-text">
-        <p>
-          I'm a developer with a deep interest in artificial intelligence and how it can be applied to
-          everyday problems. My work spans from machine learning experiments to full-stack applications,
-          always with an emphasis on clarity and usability.
-        </p>
-        <p>
-          When I'm not writing code, I'm researching the latest developments in AI, prototyping new ideas,
-          or refining projects that push the boundaries of what's possible with current technology.
-        </p>
+  </div>
+</section>
+
+<section class="journey" id="journey">
+  <div class="wrap">
+    <span class="eyebrow">Journey</span>
+    <h2>How I got here</h2>
+    <div class="timeline">
+      <div class="spine">
+        <div class="seg-weld"></div>
+        <div class="seg-circuit"></div>
       </div>
-      <div class="about-details">
-        <div class="detail-item">
-          <div class="detail-label">Focus</div>
-          <div class="detail-value">AI / Machine Learning</div>
+
+      <div class="milestone">
+        <div class="marker"></div>
+        <span class="m-eyebrow">Early foundation</span>
+        <div class="m-head">
+          <h3>FIRST Robotics</h3>
+          <span class="m-date">High school</span>
         </div>
-        <div class="detail-item">
-          <div class="detail-label">Approach</div>
-          <div class="detail-value">Research-Driven Development</div>
+        <p>Built and programmed competition robots, my first real experience writing software for a physical system.</p>
+      </div>
+
+      <div class="milestone">
+        <div class="marker"></div>
+        <span class="m-eyebrow">Trade</span>
+        <div class="m-head">
+          <h3>Pipe welding and fabrication</h3>
+          <span class="m-date">2022 – 2023</span>
         </div>
-        <div class="detail-item">
-          <div class="detail-label">Location</div>
-          <div class="detail-value">South Carolina</div>
+        <div class="m-org">Associate of Applied Science, Welding, Spartanburg Community College &nbsp;·&nbsp; Pipe Welder, InFab</div>
+        <p>Construction and manufacturing work, including reading blueprints, following complex job orders, and reprogramming welding machines. An early, hands on introduction to automation and control systems.</p>
+      </div>
+
+      <div class="milestone node-circuit">
+        <div class="marker"></div>
+        <span class="m-eyebrow">Pivot</span>
+        <div class="m-head">
+          <h3>Cybersecurity and computer science</h3>
+          <span class="m-date">2024 – Present</span>
         </div>
-        <div class="detail-item">
-          <div class="detail-label">Currently</div>
-          <div class="detail-value">Open to Opportunities</div>
+        <div class="m-org">Associate of Science, Cybersecurity, Greenville Technical College &nbsp;·&nbsp; B.S. Computer Science, Clemson University</div>
+        <p>Moved from the trades into formal computing education, starting with systems and cybersecurity coursework before continuing into a Computer Science degree at Clemson.</p>
+      </div>
+
+      <div class="milestone node-circuit">
+        <div class="marker"></div>
+        <span class="m-eyebrow">Research</span>
+        <div class="m-head">
+          <h3>AI SENDS Lab, Clemson University</h3>
+          <span class="m-date">Current</span>
         </div>
+        <p>Research assistant interfacing vision language models and vision transformers into robotics applications, working within the lab's focus on perception and autonomy under real world constraints.</p>
+      </div>
+
+      <div class="milestone node-circuit">
+        <div class="marker"></div>
+        <span class="m-eyebrow">Independent work</span>
+        <div class="m-head">
+          <h3>Personal projects</h3>
+          <span class="m-date">2025 – Present</span>
+        </div>
+        <p>Reinforcement learning for autonomous drones, and a real time audio plugin that analyzes a mix and flags issues, built to keep exploring outside the lab.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="divider"></div>
-
-  <section id="projects" class="fade-in">
-    <div class="section-header">
-      <span class="section-number">02</span>
-      <h2 class="section-title">Projects</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="projects-grid">
+<section class="projects" id="projects">
+  <div class="wrap">
+    <span class="eyebrow">Projects</span>
+    <h2>Selected work</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <div>
+          <h3>Autonomous drone obstacle avoidance</h3>
+          <span class="m-date">3/2026 – Present</span>
+          <p>Trained a quadcopter to autonomously navigate and avoid static and dynamic obstacles using PPO in a simulated CoppeliaSim environment, with a custom Gymnasium environment, multi component reward system, and continuous 3D action space. GPU accelerated with CUDA, monitored with TensorBoard.</p>
+        </div>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">Gymnasium</span>
+          <span class="tag">CoppeliaSim</span>
+        </div>
+      </div>
 
       <div class="project-card">
         <div>
-          <div class="project-name">Autonomous Drone Obstacle Avoidance</div>
-          <p class="project-desc">
-            A reinforcement learning system for training a quadcopter in CoppeliaSim to autonomously
-            explore and avoid obstacles using PPO (Proximal Policy Optimization) and LiDAR sensor feedback.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Reinforcement Learning</span>
-            <span class="tag">PPO</span>
-          </div>
+          <h3>TrackTweak</h3>
+          <span class="m-date">8/2025 – Present</span>
+          <p>A real time audio analysis plugin built with JUCE that detects mix issues through signal analysis and feature extraction, offering feedback within a modular, object oriented, real time constrained architecture.</p>
         </div>
-        <span class="project-number">001</span>
+        <div class="tag-row">
+          <span class="tag">C++</span>
+          <span class="tag">JUCE</span>
+          <span class="tag">DSP</span>
+        </div>
       </div>
 
       <div class="project-card">
         <div>
-          <div class="project-name">TrackTweakVST</div>
-          <p class="project-desc">
-            VST/VST3 audio plugin built with the JUCE framework that analyzes incoming signals from a musical piece
-            and offers AI-driven guidance to professionally mix a track based on specific genres and styles.
-          </p>
-          <div class="project-tags">
-            <span class="tag">C++</span>
-            <span class="tag">JUCE</span>
-            <span class="tag">AI / Audio</span>
-          </div>
+          <h3>Robotic manipulation simulation</h3>
+          <p>Built a simulation environment for contact rich robotic manipulation, modeling tactile and force/torque sensor feedback across configurable object materials to test a grip adjustment algorithm in a closed loop, repeatable testbed.</p>
         </div>
-        <span class="project-number">002</span>
-      </div>
-
-      <div class="project-card">
-        <div>
-          <div class="project-name">Personal Dashboard</div>
-          <p class="project-desc">
-            A custom-built web dashboard for aggregating data sources, tracking goals,
-            and visualizing personal metrics in a unified interface.
-          </p>
-          <div class="project-tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">REST API</span>
-            <span class="tag">Data Viz</span>
-          </div>
+        <div class="tag-row">
+          <span class="tag">Robotics Simulation</span>
+          <span class="tag">Tactile Sensing</span>
         </div>
-        <span class="project-number">003</span>
       </div>
-
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="divider"></div>
-
-  <section id="skills" class="fade-in">
-    <div class="section-header">
-      <span class="section-number">03</span>
-      <h2 class="section-title">Skills</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="skills-layout">
+<section class="skills" id="skills">
+  <div class="wrap">
+    <span class="eyebrow">Skills</span>
+    <h2>Skills</h2>
+    <div class="skill-grid">
       <div class="skill-group">
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-item">Python</div>
-        <div class="skill-item">Java</div>
-        <div class="skill-item">C / C++</div>
+        <div class="g-title">Languages</div>
+        <ul>
+          <li>Python</li>
+          <li>Java</li>
+          <li>C / C++</li>
+        </ul>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">AI / ML</div>
-        <div class="skill-item">PyTorch</div>
-        <div class="skill-item">TensorFlow</div>
-        <div class="skill-item">Gymnasium</div>
-        <div class="skill-item">stable-baselines3</div>
+        <div class="g-title">AI / ML</div>
+        <ul>
+          <li>PyTorch</li>
+          <li>TensorFlow</li>
+          <li>stable-baselines3</li>
+          <li>CUDA</li>
+          <li>Vision Language Models</li>
+        </ul>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Tools</div>
-        <div class="skill-item">Git / GitHub</div>
-        <div class="skill-item">Visual Studio</div>
-        <div class="skill-item">Linux</div>
+        <div class="g-title">Robotics and simulation</div>
+        <ul>
+          <li>NVIDIA Isaac Sim</li>
+          <li>Inverse Kinematics</li>
+          <li>Autonomous Systems</li>
+          <li>Tactile Sensing (GelSight, DIGIT, ATI)</li>
+          <li>Contact and Physics Simulation</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="g-title">Infrastructure and tools</div>
+        <ul>
+          <li>Palmetto 2 Cluster (Clemson HPC)</li>
+          <li>Docker</li>
+          <li>Git / GitHub</li>
+          <li>Linux</li>
+          <li>Visual Studio</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="divider"></div>
-
-  <section id="contact" class="fade-in">
-    <div class="section-header">
-      <span class="section-number">04</span>
-      <h2 class="section-title">Contact</h2>
-      <div class="section-line"></div>
+<footer id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h2>Let's talk</h2>
+    <p>Interested in working together, have a question about a project, or just want to connect. I'm always open to a conversation.</p>
+    <div class="contact-links">
+      <a href="https://github.com/bmap02" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="mailto:benmaples.work@gmail.com">Email ↗</a>
+      <a href="https://www.linkedin.com/in/benjamin-maples-a93205224" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
-    <div class="contact-content">
-      <p class="contact-text">
-        Interested in working together, have a question about a project,
-        or just want to connect? I'm always open to a conversation.
-        Reach out through any of the channels listed here.
-      </p>
-      <div class="contact-links">
-        <a href="https://github.com/bmap02" target="_blank" class="contact-link">
-          <div>
-            <div class="contact-link-label">GitHub</div>
-            <div>github.com/bmap02</div>
-          </div>
-          <span class="contact-link-arrow">&#8594;</span>
-        </a>
-        <a href="mailto:benmaples.work@gmail.com" class="contact-link">
-          <div>
-            <div class="contact-link-label">Email</div>
-            <div>benmaples.work@gmail.com</div>
-          </div>
-          <span class="contact-link-arrow">&#8594;</span>
-        </a>
-        <a href="https://www.linkedin.com/in/benjamin-maples-a93205224" target="_blank" class="contact-link">
-          <div>
-            <div class="contact-link-label">LinkedIn</div>
-            <div>linkedin.com/in/benjamin-maples</div>
-          </div>
-          <span class="contact-link-arrow">&#8594;</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>Benjamin Maples &mdash; 2025</p>
-  </footer>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
+    <div class="copyright mono">© 2026 Benjamin Maples</div>
+  </div>
+</footer>
 
 </body>
 </html>
