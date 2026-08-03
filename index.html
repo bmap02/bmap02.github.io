@@ -128,6 +128,25 @@
   }
   section.about p:last-of-type{ margin-bottom:0; }
   section.about a{ color:var(--arc); }
+  .about-layout{
+    display:flex;
+    gap:44px;
+    align-items:flex-start;
+  }
+  .about-text{ flex:1; min-width:0; }
+  .about-photo{
+    flex-shrink:0;
+    width:220px;
+  }
+  .about-photo img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    border-radius:6px;
+    border:1px solid var(--panel-line);
+    border-top:3px solid var(--ember);
+  }
   .lab-note{
     margin-top:22px;
     padding:16px 18px;
@@ -384,6 +403,56 @@
   .play-btn:hover{ background:var(--arc); }
   .play-btn:active{ transform:scale(0.94); }
   .audio-meta{ min-width:0; }
+  .audio-progress-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .audio-volume-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .audio-volume{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-shrink:0;
+  }
+  .volume-slider{
+    -webkit-appearance:none;
+    appearance:none;
+    width:110px;
+    height:4px;
+    border-radius:3px;
+    background:var(--panel-line);
+    cursor:pointer;
+    outline:none;
+  }
+  .volume-slider::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    appearance:none;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--arc);
+    cursor:pointer;
+    border:none;
+  }
+  .volume-slider::-moz-range-thumb{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--arc);
+    cursor:pointer;
+    border:none;
+  }
+  .volume-slider::-moz-range-track{
+    height:4px;
+    border-radius:3px;
+    background:var(--panel-line);
+  }
   .audio-title{
     font-family:'Oswald', sans-serif;
     font-size:17px;
@@ -495,6 +564,8 @@
     nav .links{ display:none; }
     .timeline{ padding-left:38px; }
     .marker{ left:-38px; }
+    .about-layout{ flex-direction:column-reverse; gap:28px; }
+    .about-photo{ width:160px; }
   }
 </style>
 </head>
@@ -525,11 +596,18 @@
   <div class="wrap">
     <span class="eyebrow">About</span>
     <h2>Background</h2>
-    <p>I'm a Computer Science student at Clemson University with a background that started outside of software, in the trades rather than the classroom. That path taught me precision, discipline, and a habit of thinking in systems, qualities I now bring directly to my work in robotics and software engineering.</p>
-    <p>I'm currently a research assistant in Clemson's AI SENDS Lab (AI based Sensing, Networking, and Data Services), led by Dr. Abolfazl Razi, where I work on interfacing vision language models and vision transformers into robotics applications. I'm especially drawn to system level programming and building software that bridges perception and control in real world environments.</p>
-    <p>Outside the lab, I chase the same curiosity through audio engineering, and enjoy understanding how systems actually work well enough to make them work better.</p>
-    <div class="lab-note">
-      Lab: <a href="https://arazi2.github.io/aisends.github.io/" target="_blank" rel="noopener">AI SENDS Lab, Clemson University</a> — currently reading into tactile feedback methods for vision language action models, including work like VLA Touch.
+    <div class="about-layout">
+      <div class="about-text">
+        <p>I'm a Computer Science student at Clemson University with a background that started outside of software, in the trades rather than the classroom. That path taught me precision, discipline, and a habit of thinking in systems, qualities I now bring directly to my work in robotics and software engineering.</p>
+        <p>I'm currently a research assistant in Clemson's AI SENDS Lab (AI based Sensing, Networking, and Data Services), led by Dr. Abolfazl Razi, where I work on interfacing vision language models and vision transformers into robotics applications. I'm especially drawn to system level programming and building software that bridges perception and control in real world environments.</p>
+        <p>Outside the lab, I chase the same curiosity through audio engineering, and enjoy understanding how systems actually work well enough to make them work better.</p>
+        <div class="lab-note">
+          Lab: <a href="https://arazi2.github.io/aisends.github.io/" target="_blank" rel="noopener">AI SENDS Lab, Clemson University</a> — currently reading into tactile feedback methods for vision language action models, including work like VLA Touch.
+        </div>
+      </div>
+      <div class="about-photo">
+        <img src="portfolio-photo.jpg" alt="Benjamin Maples">
+      </div>
     </div>
   </div>
 </section>
@@ -643,7 +721,7 @@
               </button>
               <div class="audio-meta">
                 <div class="audio-title">Knock Me Off My Feet</div>
-                <div class="audio-sub">Mixed and analyzed with TrackTweak</div>
+                <div class="audio-sub">Mixed and analyzed with TrackTweak (Song produced by me!)</div>
               </div>
             </div>
             <div class="audio-progress-row">
@@ -652,6 +730,10 @@
                 <div class="audio-progress-fill"></div>
               </div>
               <span class="audio-time audio-duration">0:00</span>
+            </div>
+            <div class="audio-volume-row">
+              <svg class="icon-volume" viewBox="0 0 24 24" width="15" height="15"><path fill="var(--slate)" d="M3 10v4h4l5 5V5L7 10H3zm13.5 2A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12z"/></svg>
+              <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1" aria-label="Volume">
             </div>
             <audio class="audio-el" src="knock-me-off-my-feet.wav" preload="metadata"></audio>
           </div>
@@ -767,6 +849,14 @@
     const track = player.querySelector('.audio-progress-track');
     const currentEl = player.querySelector('.audio-current');
     const durationEl = player.querySelector('.audio-duration');
+    const volumeSlider = player.querySelector('.volume-slider');
+
+    if (volumeSlider) {
+      audio.volume = parseFloat(volumeSlider.value);
+      volumeSlider.addEventListener('input', () => {
+        audio.volume = parseFloat(volumeSlider.value);
+      });
+    }
 
     playBtn.addEventListener('click', () => {
       if (audio.paused) {
